@@ -13,6 +13,7 @@ router.get("/", (req, res, next) => {
 router.post("/", (req, res, next) => {
   try {
     let newItem = new Item(req.body.name, req.body.price);
+    res.status(201);
     return res.json({ added: newItem });
   } catch (err) {
     return next(err);
@@ -22,6 +23,7 @@ router.post("/", (req, res, next) => {
 router.get("/:name", (req, res, next) => {
   try {
     let foundItem = Item.findItem(req.params.name);
+
     return res.json({ item: foundItem });
   } catch (err) {
     return next(err);
@@ -41,6 +43,7 @@ router.patch("/:name", (req, res, next) => {
 router.delete("/:name", (req, res, next) => {
   try {
     let deletedItem = Item.deleteItem(req.params.name);
+    // res.status(202);
     return res.json({ message: `Item ${req.params.name} deleted` });
   } catch (err) {
     return next(err);
